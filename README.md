@@ -1,53 +1,167 @@
-# Start with Nuxt3
+# Basics of Vue development
 
-## Installation
+## Vue file structure
 
-You would need to download the following:
+All files that end in `.vue` are Vue files. They consist of 3 parts (all optional based on your code). They are "The JS part", "The CSS part", and "The HTML part".
 
-- [Nodejs](https://nodejs.org/en/download/)
-- [Git](https://git-scm.com/downloads)
-- [Visual Studio (or any other Text Editor/IDE)](https://code.visualstudio.com)
+`app.vue`:
 
-## Verify your installation
+```vue
+<script>
+// The JS part
+</script>
 
-Open the terminal on your system and run the following commands separately:
+<template>
+<!-- The HTML part -->
+</template>
 
-```bash
-node -v
-npm -v
-git --version
+<style>
+/* The CSS part */
+</style>
 ```
 
-You should be able to see the version numbers after entering each command. If you do not, you haven't installed the requirements properly.
+## Adding some HTML and CSS content
 
-## Creating your Nuxt Project
+Referencing to our orientation website that we created, the HTML part of the `app.vue` file should be like:
 
-Enter into your directory where you wish to create the project. Run the following command:
+```vue
+<template>
+  <div>
+    <h1>Heading tag</h1>
+    <h2>My first website</h2>
+    <button>Click me</button>
+    <p>Number of clicks: 0</p>
+  </div>
+</template>
 
-```bash
-npx nuxt init <project-name>
+<style>
+body {
+  padding: 0;
+  margin: 0;
+}
+
+h1 {
+  width: 100%;
+  text-align: center;
+  background-color: green;
+  color: white;
+  margin: 0;
+}
+
+button {
+  box-shadow: 0 0 8px 4px lightgrey;
+}
+</style>
 ```
 
-In our case, the `project-name` shall be countries. So you should run:
+Right now, if you run this code, it will not work because we didn't add any JavaScript code.
 
-```bash
-npx nuxi init countries
-cd countries
-npm install
+## Adding some JS code
+
+At first, we need to have a stateful reactive object. A **reactive** variable is one that re-renders the DOM(Document-Object Modal) when its value changes. We also need to have a function that would increment the value of this variable whenever invoked. Let's try that.
+
+```vue
+<script setup>
+const number = ref(0)
+
+function handleClick() {
+  number.value++
+}
+</script>
 ```
 
-After creating the project, enter into the directory and install the required dependencies.
+*Note*: the `setup` keyword after the script is important
 
-## The app.vue file
+`ref` is a function that is provided by Vue that tells the framework that `number` is a reactive variable; whenever there is any change in its value, re-render the entire vue file.
 
-The app.vue file is specific to Nuxt. Anything and Everything we code in the `app.vue` file shall be rendered on the website.
+However, this still wouldn't work on the browser because we did not connect the two together.
 
-## Running your project
+## Integrating HTML and JS
 
-To view your development, run the following command:
+Inside the `<template />`, we have our HTML content. We need to attach the button to the `handleClick` function. We can perform this by adding the following *vue directive*
 
-```bash
-npm run dev
+```vue
+<template>
+    <!-- code -->
+    <button v-on:click="handleClick">Click me</button>
+</template>
 ```
 
-and this will start your project server. After the Nitro server has successfully started, you can view your website on this [link](https://localhost:3000) in your browser.
+`v-on:click` is the means that whenever the button is clicked, the `handleClick` function will be called; thereby, incrementing the value of number.
+
+We also need to reflect the number in the next line (inside the `<p />`)
+
+```vue
+<template>
+    <!-- v-on: can be replaced with @ -->
+    <button @click="handleClick">Click me</button>
+    <p>Number of clicks: {{ number }}</p>
+</template>
+```
+
+To display any variable inside the `<template />`, we use the double curly brackets to do so. Run your code and you will be able to see the number incrementing on every click.
+
+### Other important Vue Directives
+
+We have already taken a look at `v-on` which calls a function with every event. Let's look at other vue directives as well.
+
+#### v-if
+
+This Vue directive accepts a boolean expression. If the expression evaluates to `true`, then the follow content is shown; or else it is hidden. For example,
+
+```vue
+<template>
+    <!-- code -->
+
+    <div v-if="number < 10">
+      Too Small
+    </div>
+</template>
+```
+
+At first, you shall see this div. But once `number` reaches 10, "Too small" is disappeared.
+
+#### v-else
+
+`v-else` must be used in conjunction with `v-if`. Naturally, it will be rendered if the original expression evaluates to `false`.
+
+```vue
+<template>
+    <!-- code -->
+
+    <div v-if="number < 10">
+      Too Small
+    </div>
+    <div v-else>
+      Too Large
+    </div>
+</template>
+```
+
+#### v-else-if
+
+An amalgamation of the two previous vue directives.
+
+```vue
+<template>
+    <!-- code -->
+
+    <div v-if="number < 10">
+      Too Small
+    </div>
+    <div v-else-if="number < 20">
+      Just enough
+    </div>
+    <div v-else>
+      Too Large
+    </div>
+</template>
+```
+
+#### v-for
+
+*Yet to finish*
+
+#### v-bind
+
+*Yet to finish*
