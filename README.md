@@ -1,5 +1,18 @@
 # Basics of Vue development
 
+## Table of Contents
+
+- [Vue file structure](#vue-file-structure)
+- [Adding some HTML and CSS content](#adding-some-html-and-css-content)
+- [Adding some JS code](#adding-some-js-code)
+- [Integrating HTML and JS](#integrating-html-and-js)
+  - [Other important Vue Directives](#other-important-vue-directives)
+    - [v-if](#v-if)
+    - [v-else](#v-else)
+    - [v-else-if](#v-else-if)
+    - [v-for](#v-for)
+    - [v-bind](#v-bind)
+
 ## Vue file structure
 
 All files that end in `.vue` are Vue files. They consist of 3 parts (all optional based on your code). They are "The JS part", "The CSS part", and "The HTML part".
