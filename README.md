@@ -101,6 +101,8 @@ We also need to reflect the number in the next line (inside the `<p />`)
 
 To display any variable inside the `<template />`, we use the double curly brackets to do so. Run your code and you will be able to see the number incrementing on every click.
 
+**Note**: We need to have be careful that reference variables need to use the `#value` property (`number.value++`) inside the `<script />`. But inside the HTML, we need to simply use the variable as itself(`number`)
+
 ### Other important Vue Directives
 
 We have already taken a look at `v-on` which calls a function with every event. Let's look at other vue directives as well.
@@ -160,8 +162,52 @@ An amalgamation of the two previous vue directives.
 
 #### v-for
 
-*Yet to finish*
+This vue directive is used when you need to render multiple tags of similar content. For example, you can have 10 different dishes for your recipe website and you can display all the 10 one by one.
+
+```vue
+<script setup>
+const list = ref([1, 2, 3, 4, 5, 6, 7, 8, 9, 10]) // array of numbers
+// ...
+</script>
+
+<template>
+    <!-- code -->
+    <div v-for="item in list">
+      <p style="color: red;">{{ item }}</p>
+    </div>
+</template>
+```
+
+This allows you to have 10 different `<div />` with numbers from 1 to 10 in red coloured text.
 
 #### v-bind
 
-*Yet to finish*
+We learnt that we can inject any reactive state inside the HTML using double curly brackets, `{{ state }}`. However, if we want to inject anything into an HTML *attribute*, we need to use the `v-bind` directive.
+
+```vue
+<script setup>
+const pColor = ref("red")
+// code
+</script>
+
+<template>
+    <!-- code -->
+    <div v-for="item in list" v-bind:key="item">
+      <p v-bind:style="{color: pColor}">{{ item }}</p>
+    </div>
+</template>
+```
+
+**Note:** `v-bind:` will accept JavaScript code inside the quotation marks and not the actual string.
+The "key" attribute is important while using the `v-for` directive as Vue needs to keep a track of all the elements it is rendering incase of any changes to the reactive list.
+
+We can also shorten the HTML part to:
+
+```vue
+<template>
+    <!-- code -->
+    <div v-for="item in list" :key="item">
+      <p :style="{color: pColor}">{{ item }}</p>
+    </div>
+</template>
+```
