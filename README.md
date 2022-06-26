@@ -1,5 +1,13 @@
 # Start with Nuxt3
 
+## Table of Contents
+
+- [Installation](#installation)
+- [Verify your installation](#verify-your-installation)
+- [Creating your Nuxt project](#creating-your-nuxt-project)
+- [The app.vue file](#the-appvue-file)
+- [Running your project](#running-your-project)
+
 ## Installation
 
 You would need to download the following:
