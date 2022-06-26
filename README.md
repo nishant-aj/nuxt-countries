@@ -41,3 +41,13 @@ After creating the project, enter into the directory and install the required de
 ## The app.vue file
 
 The app.vue file is specific to Nuxt. Anything and Everything we code in the `app.vue` file shall be rendered on the website.
+
+## Running your project
+
+To view your development, run the following command:
+
+```bash
+npm run dev
+```
+
+and this will start your project server. After the Nitro server has successfully started, you can view your website on this [link](https://localhost:3000) in your browser.
